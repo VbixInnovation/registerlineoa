@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="th">
 <head>
-  <meta charset="utf-8">
-  <title>LIFF Registration</title>
+  <meta charset="UTF-8">
+  <title>ลงทะเบียนผ่าน LINE</title>
   <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
 </head>
 <body>
-  <h2>กำลังตรวจสอบ LINE</h2>
+  <h2>กำลังเข้าสู่ระบบผ่าน LINE...</h2>
   <script>
     async function main() {
       await liff.init({ liffId: "YOUR_LIFF_ID" });
+
       if (!liff.isLoggedIn()) {
         liff.login();
         return;
@@ -19,10 +20,11 @@
       const userId = profile.userId;
       const displayName = profile.displayName;
 
-      // ส่งข้อมูลเข้า API หรือแสดงผลก็ได้
-      document.body.innerHTML = `<h3>✅ สวัสดีคุณ ${displayName}</h3><p>UserID: ${userId}</p>`;
-      
-      // หรือ auto POST ไป Kissflow API ได้ที่นี่
+      document.body.innerHTML = `
+        <h3>✅ สวัสดีคุณ ${displayName}</h3>
+        <p>UserID: ${userId}</p>
+        <!-- คุณสามารถเพิ่มฟอร์ม หรือ POST ไปยัง API ได้ที่นี่ -->
+      `;
     }
 
     main();
