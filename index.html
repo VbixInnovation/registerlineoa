@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>ลงทะเบียนผ่าน LINE</title>
+  <meta charset="utf-8">
+  <title>LIFF Redirect</title>
   <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
 </head>
 <body>
-  <h2 id="status">กำลังเข้าสู่ระบบผ่าน LINE...</h2>
+  <h2>กำลังเข้าสู่ระบบ...</h2>
   <script>
     async function main() {
       try {
-        await liff.init({ liffId: "2007600523-GZdX7vY7" }); // << ใส่ LIFF ID ให้ถูกต้อง
+        await liff.init({ liffId: "2007600523-GZdX7vY7" });
 
         if (!liff.isLoggedIn()) {
           liff.login();
@@ -19,15 +19,14 @@
 
         const profile = await liff.getProfile();
         const userId = profile.userId;
-        const displayName = profile.displayName;
 
-        document.body.innerHTML = `
-          <h3>✅ สวัสดีคุณ ${displayName}</h3>
-          <p><b>UserID:</b> ${userId}</p>
-        `;
+        // ✅ กำหนด URL ปลายทางที่จะ redirect พร้อมแนบ userId
+        const targetURL = `https://vbixlc.kissflow.com/view/application/Aum_Register_Line_A00?userId=${encodeURIComponent(userId)}`;
+
+        window.location.href = targetURL; // 🔁 Redirect ไปยัง Kissflow Page
       } catch (err) {
-        console.error("LIFF error:", err);
-        document.getElementById("status").innerText = "❌ เกิดข้อผิดพลาดในการโหลด LINE LIFF: " + err.message;
+        document.body.innerHTML = `<h3 style="color:red">❌ เกิดข้อผิดพลาด: ${err.message}</h3>`;
+        console.error(err);
       }
     }
 
