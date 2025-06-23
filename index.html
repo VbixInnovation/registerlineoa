@@ -21,7 +21,7 @@
         const userId = profile.userId;
 
         // ✅ กำหนด URL ปลายทางที่จะ redirect พร้อมแนบ userId
-        const targetURL = `https://vbixlc.kissflow.com/view/application/Aum_Register_Line_A00?userId=${encodeURIComponent(userId)}`;
+        const targetURL = `https://vbixlc.kissflow.com/view/application/Aum_Register_Line_A00/page/Register_Page_A00?userId=${encodeURIComponent(userId)}`;
 
         window.location.href = targetURL; // 🔁 Redirect ไปยัง Kissflow Page
       } catch (err) {
